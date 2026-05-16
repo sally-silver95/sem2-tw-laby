@@ -59,3 +59,15 @@ document.querySelector('#app').innerHTML = `
 `
 
 setupCounter(document.querySelector('#counter'))
+
+const inputUrodzin = document.getElementById("birthday")
+const przycisk = document.getElementById("submit")
+const message = document.getElementById("message")
+const result = document.getElementById("result")
+
+przycisk.addEventListener("click", function() {
+  const dataUrodzin = inputUrodzin.value
+  const czas = dayjs().diff(dataUrodzin, 'days')
+  message.textContent = `Od twoich urodzin mineło ${czas} dni.`
+  result.showModal()
+})
