@@ -6,3 +6,8 @@ export default defineConfig({
     tailwindcss(),
   ],
 })
+
+export default defineConfig({
+  base: '/sem-2-tw-laby/',
+  plugins: [tailwindcss()],
+})
