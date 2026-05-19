@@ -61,13 +61,30 @@ document.querySelector('#app').innerHTML = `
 setupCounter(document.querySelector('#counter'))
 
 const inputUrodzin = document.getElementById("birthday")
-const przycisk = document.getElementById("submit")
+const przyciskSub = document.getElementById("submit")
 const message = document.getElementById("message")
 const result = document.getElementById("result")
+const close = document.getElementById("close")
 
-przycisk.addEventListener("click", function() {
+przyciskSub.addEventListener("click", function() {
   const dataUrodzin = inputUrodzin.value
   const czas = dayjs().diff(dataUrodzin, 'days')
-  message.textContent = `Od twoich urodzin mineło ${czas} dni.`
+
+  const dzienUrodzin = dayjs(dataUrodzin)
+  const dzis = dayjs()
+
+  const czyUrodziny = dzienUrodzin.date() === dzis.date() && dzienUrodzin.month() === dzis.month()
+  let tekst = `Od twoich urodzin mineło ${czas} dni.`
+
+  if (czyUrodziny) {
+    tekst = tekst + ` Wszystkiego najlepszego!`
+  } 
+  message.textContent = tekst
   result.showModal()
+
 })
+
+
+close.addEventListener("click", function() {
+  result.close();
+});
