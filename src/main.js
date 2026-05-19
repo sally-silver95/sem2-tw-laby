@@ -76,14 +76,22 @@ przyciskSub.addEventListener("click", function() {
   const czyUrodziny = dzienUrodzin.date() === dzis.date() && dzienUrodzin.month() === dzis.month()
   let tekst = `Od twoich urodzin mineło ${czas} dni.`
 
+  let najblizszeUrodziny = dzienUrodzin.year(dzis.year()) 
+  if (najblizszeUrodziny.isBefore(dzis)) {
+    najblizszeUrodziny = najblizszeUrodziny.add(1, 'year')
+  }
+  const liczbaTyg = najblizszeUrodziny.diff(dzis, 'week')
+  
   if (czyUrodziny) {
     tekst = tekst + ` Wszystkiego najlepszego!`
-  } 
+  } else if (liczbaTyg === 0) {
+    tekst = tekst + ` Masz urodziny w tym tygodniu, wiesz?`
+  } else {
+    tekst = tekst + ` Do twoich urodzin zostało ${liczbaTyg} tygodnie.`
+  }
   message.textContent = tekst
   result.showModal()
-
 })
-
 
 close.addEventListener("click", function() {
   result.close();
